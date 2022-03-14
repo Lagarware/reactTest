@@ -1,2 +1,5 @@
 # reactTest
-test
+to run project
+npm i
+npm start
+
