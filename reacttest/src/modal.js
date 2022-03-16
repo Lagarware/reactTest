@@ -1,15 +1,17 @@
+// this component only displays messages from server that would respond with an array of errors or a text attribute 
 import {Modal,Button} from 'react-bootstrap'
 export default function ModalWindow ({showModal,handleClose,msg}){
     let content
-    if(Object.keys(msg).length !== 0 && msg.resp.errors ){
+    // we are going to get either errors or text (when everything is Ok)
+    if(Object.keys(msg).length !== 0 && msg.errors ){
         content = <ul>{
-             msg.resp.errors.map((err,i) =>{
+             msg.errors.map((err,i) =>{
                  return <li key={i}>{`${err.message} revisar campo ${err.field}`}</li>
              })
             }</ul>
     }
-    if(Object.keys(msg).length !== 0 && msg.resp.amount ){
-        content = <span>{`Para un crédito de ${msg?.resp.amount} ${msg.resp.text} por un número de períodos de ${msg.resp.payTime}`}</span>
+    if(Object.keys(msg).length !== 0 && msg.text ){
+        content = <span>{msg.text}</span>
     }
     return(
         <Modal show={showModal} onHide={handleClose}>
